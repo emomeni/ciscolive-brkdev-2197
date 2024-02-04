@@ -1,0 +1,71 @@
+{
+    "contentType": "application/vnd.microsoft.card.adaptive",
+    "content": {
+            "type": "AdaptiveCard",
+            "body": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "{{ section_title }}",
+                                    "weight": "Lighter",
+                                    "color": "Accent"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "Bolder",
+                                    "text": "{{ title }}",
+                                    "horizontalAlignment": "Left",
+                                    "wrap": true,
+                                    "color": "Light",
+                                    "size": "Large",
+                                    "spacing": "Small"
+                                }
+                            ],
+                            "width": "stretch"
+                        }
+                    ]
+                },
+
+                {
+                    "type": "FactSet",
+                    "facts": [{% for item in text_list %}
+                        {
+                            "title": "{{ item.title }}",
+                            "value": "{{ item.value }}"
+                        }{{ "," if not loop.last else "" }}
+                        {% endfor -%}
+                    ]
+                },
+                {
+                    "type": "ActionSet",
+                    "actions": [
+                        {
+                            "type": "Action.Submit",
+                            "title": "✅ Accept",
+                            "style": "positive",
+                            "id": "accept",
+                            "data": {
+                                "approved": true
+                            }
+                        },
+                        {
+                            "type": "Action.Submit",
+                            "title": "❌ Decline",
+                            "style": "destructive",
+                            "id": "decline",
+                            "data": {
+                                "approved": false
+                            }
+                        }
+                    ]
+                }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "version": "1.3"
+    }
+}

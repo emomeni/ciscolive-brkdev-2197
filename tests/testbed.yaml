@@ -1,0 +1,22 @@
+---
+testbed:
+    name: Cisco Live testbed
+devices:
+    switch:
+        connections:
+            cli:
+                ip: "%ENV{DEVICE_IP}"
+                protocol: ssh
+                port: 8000
+            rest:
+                # specify the rest connector class
+                class: rest.connector.Rest
+                ip: "%ENV{DEVICE_IP}"
+        credentials:
+            default:
+                password: "%ENV{DEVICE_PASSWORD}"
+                username: "%ENV{DEVICE_USERNAME}"
+            enable:
+                password: "%ENV{DEVICE_PASSWORD}"
+        os: iosxe
+        type: iosxe
